@@ -1,20 +1,20 @@
-import Image from "next/image"
+import Image from "next/image";
 
-export function LoginImagePanel() {
+export function LoginBanner() {
   return (
-    <div className="relative hidden h-screen w-1/2 lg:block">
+    <div className="relative hidden min-w-4xl lg:block">
       {/* Background Image */}
       <Image
-        src="/images/login-bg.jpg"
+        src="/images/bg-auth.png"
         alt="Pessoa assinando documento em ambiente corporativo"
         fill
-        className="object-cover"
+        className="object-cover h-screen w-full"
         priority
       />
-      
+
       {/* Dark Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
-      
+      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/20" />
+
       {/* Overlay Text */}
       <div className="absolute bottom-0 left-0 right-0 p-10 lg:p-12">
         <h2 className="text-balance text-3xl font-bold tracking-tight text-white lg:text-4xl">
@@ -25,5 +25,5 @@ export function LoginImagePanel() {
         </p>
       </div>
     </div>
-  )
+  );
 }
