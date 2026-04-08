@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { LoginForm } from "./_components/Form";
 import { LoginBanner } from "./_components/Banner";
 
