@@ -16,6 +16,7 @@ import { Button } from "@/src/components/ui/button";
 import { Input } from "@/src/components/ui/input";
 import { Field, FieldGroup, FieldLabel } from "@/src/components/ui/field";
 import { api } from "@/src/utils/api";
+import { loginAction } from "../actions/auth";
 
 const schema = yup.object().shape({
   username: yup
@@ -34,7 +35,7 @@ const schema = yup.object().shape({
 });
 
 export function LoginForm() {
-  const { onAuth, isLoading: isAuthLoading } = useAuth();
+  const { isLoading: isAuthLoading } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [unitOptions, setUnitOptions] = useState<
     { value: number; label: string }[]
@@ -102,9 +103,9 @@ export function LoginForm() {
       await fetchUnits(data.username);
     }
 
-    const success = await onAuth(data);
+    const result = await loginAction(data);
 
-    if (success) {
+    if (result.success) {
       const redirectUrl = searchParams.get("url_redirect");
 
       if (redirectUrl && typeof window !== "undefined") {
