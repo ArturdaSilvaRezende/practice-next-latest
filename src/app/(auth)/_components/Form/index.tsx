@@ -16,7 +16,6 @@ import { Button } from "@/src/components/ui/button";
 import { Input } from "@/src/components/ui/input";
 import { Field, FieldGroup, FieldLabel } from "@/src/components/ui/field";
 import { api } from "@/src/utils/api";
-import { loginAction } from "../actions/auth";
 
 const schema = yup.object().shape({
   username: yup
@@ -35,7 +34,7 @@ const schema = yup.object().shape({
 });
 
 export function LoginForm() {
-  const { isLoading: isAuthLoading } = useAuth();
+  const { onAuth, isLoading: isAuthLoading } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [unitOptions, setUnitOptions] = useState<
     { value: number; label: string }[]
@@ -61,6 +60,8 @@ export function LoginForm() {
   const fetchUnits = useCallback(
     async (username: string) => {
       if (!username || username.length < 4) return;
+
+      
 
       try {
         const params = new URLSearchParams(
@@ -99,20 +100,14 @@ export function LoginForm() {
   }, [usernameValue, debouncedFetchUnits]);
 
   const handleLoginClick = async (data: any) => {
-    if (!data.id_unity) {
-      await fetchUnits(data.username);
-    }
-
-    const result = await loginAction(data);
+    const result = await onAuth(data); // <--- Chamando via contexto agora
 
     if (result.success) {
-      const redirectUrl = searchParams.get("url_redirect");
-
-      if (redirectUrl && typeof window !== "undefined") {
-        window.location.href = redirectUrl;
-      } else {
-        router.push("/modules");
-      }
+      const redirectUrl = searchParams.get("url_redirect") || "/modules";
+      router.refresh();
+      router.push(redirectUrl);
+    } else {
+      alert(result.error);
     }
   };
 
