@@ -6,16 +6,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { useForm, useWatch } from "react-hook-form";
 import { Eye, EyeOff, Building2, Mail, Lock } from "lucide-react";
-import { useAuth } from "../hooks";
+import { useAuth } from "../../_hooks";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Select from "react-select";
 import debounce from "lodash/debounce";
 import * as yup from "yup";
 
-import { Button } from "@/src/components/ui/button";
-import { Input } from "@/src/components/ui/input";
-import { Field, FieldGroup, FieldLabel } from "@/src/components/ui/field";
-import { api } from "@/src/utils/api";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
+import { api } from "@/utils/api";
+
 
 const schema = yup.object().shape({
   username: yup
@@ -60,8 +61,6 @@ export function LoginForm() {
   const fetchUnits = useCallback(
     async (username: string) => {
       if (!username || username.length < 4) return;
-
-      
 
       try {
         const params = new URLSearchParams(
