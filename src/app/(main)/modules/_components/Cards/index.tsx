@@ -1,26 +1,21 @@
-import Image from "next/image"
-import { ChevronRight } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
-import { cn } from "@/lib/utils"
-
-interface MetaItem {
-  icon: React.ReactNode
-  label: string
-}
+import Image from "next/image";
+import { ChevronRight } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 
 interface NotificationBox {
-  title: string
-  subtitle: string
+  title: string;
+  subtitle: string;
 }
 
 interface FeatureCardProps {
-  title: string
-  description: string
-  imageSrc: string
-  imageAlt: string
-  metadata: MetaItem[]
-  notification?: NotificationBox
+  title: string;
+  description: string;
+  imageSrc: string;
+  imageAlt: string;
+  metadata: { icon: string; label: string }[];
+  notification?: NotificationBox;
 }
 
 export function FeatureCard({
@@ -32,10 +27,12 @@ export function FeatureCard({
   notification,
 }: FeatureCardProps) {
   return (
-    <Card className={cn(
-      "overflow-hidden transition-all duration-200 hover:shadow-lg hover:border-primary/20 py-0 gap-0",
-      "group cursor-pointer"
-    )}>
+    <Card
+      className={cn(
+        "overflow-hidden transition-all duration-200 hover:shadow-lg hover:border-primary/20 py-0 gap-0",
+        "group cursor-pointer",
+      )}
+    >
       {/* Image */}
       <div className="relative aspect-video overflow-hidden">
         <Image
@@ -60,7 +57,10 @@ export function FeatureCard({
         {/* Metadata */}
         <div className="flex flex-wrap gap-3">
           {metadata.map((item, index) => (
-            <div key={index} className="flex items-center gap-1.5 text-sm text-muted-foreground">
+            <div
+              key={index}
+              className="flex items-center gap-1.5 text-sm text-muted-foreground"
+            >
               {item.icon}
               <span>{item.label}</span>
             </div>
@@ -70,14 +70,16 @@ export function FeatureCard({
         {/* Notification Box (optional) */}
         {notification && (
           <div className="bg-orange-50 border border-orange-200 rounded-lg p-3">
-            <p className="font-semibold text-orange-700 text-sm">{notification.title}</p>
+            <p className="font-semibold text-orange-700 text-sm">
+              {notification.title}
+            </p>
             <p className="text-xs text-orange-600">{notification.subtitle}</p>
           </div>
         )}
 
         {/* Link */}
-        <a 
-          href="#" 
+        <a
+          href="#"
           className="inline-flex items-center text-sm text-primary font-medium hover:underline mt-auto"
         >
           Clique para Acessar
@@ -85,5 +87,5 @@ export function FeatureCard({
         </a>
       </CardContent>
     </Card>
-  )
+  );
 }
