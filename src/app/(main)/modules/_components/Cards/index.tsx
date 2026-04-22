@@ -14,7 +14,7 @@ interface FeatureCardProps {
   description: string;
   imageSrc: string;
   imageAlt: string;
-  metadata: { icon: string; label: string }[];
+  metadata: { icon: React.ReactNode; label: string }[]; 
   notification?: NotificationBox;
 }
 
