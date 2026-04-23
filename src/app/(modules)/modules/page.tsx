@@ -28,6 +28,8 @@ export default async function Modules() {
     });
   };
 
+  const routes = ["/processos", "/modelos", "/usuarios", "/unidade"];
+
   return (
     <main>
       <Navbar />
@@ -44,6 +46,7 @@ export default async function Modules() {
             imageAlt={module.title}
             // Transformação dos dados da API para o componente
             metadata={mapIndicatorsToMetadata(module.indicators)}
+            href={routes[index] || "#"}
           />
         ))}
       </section>

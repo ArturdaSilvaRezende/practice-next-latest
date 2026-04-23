@@ -1,8 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
+
 
 interface NotificationBox {
   title: string;
@@ -16,6 +18,7 @@ interface FeatureCardProps {
   imageAlt: string;
   metadata: { icon: React.ReactNode; label: string }[]; 
   notification?: NotificationBox;
+  href: string;
 }
 
 export function FeatureCard({
@@ -25,6 +28,7 @@ export function FeatureCard({
   imageAlt,
   metadata,
   notification,
+  href
 }: FeatureCardProps) {
   return (
     <Card
@@ -78,13 +82,13 @@ export function FeatureCard({
         )}
 
         {/* Link */}
-        <a
-          href="#"
+        <Link
+          href={href}
           className="inline-flex items-center text-sm text-primary font-medium hover:underline mt-auto"
         >
           Clique para Acessar
           <ChevronRight className="w-4 h-4 ml-0.5" />
-        </a>
+        </Link>
       </CardContent>
     </Card>
   );
